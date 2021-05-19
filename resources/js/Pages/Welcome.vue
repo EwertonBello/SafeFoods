@@ -30,7 +30,7 @@
                 </inertia-link>
             </div>
             <div class="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3  justify-center">
-                <img class="w-2/3" :src="chef" alt="Chef">
+                <img class="w-2/3 mx-auto md:mx-0" :src="chef" alt="Chef">
             </div>
         </div>
 
