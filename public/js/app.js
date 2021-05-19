@@ -22869,7 +22869,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-    "class": "w-2/3",
+    "class": "w-2/3 mx-auto md:mx-0",
     src: _ctx.chef,
     alt: "Chef"
   }, null, 8
