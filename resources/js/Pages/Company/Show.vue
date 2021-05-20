@@ -13,9 +13,10 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi non quia dolorum quasi voluptatibus quas, officiis ipsam amet, pariatur placeat ex eos beatae voluptate neque repudiandae officia voluptatum ad cupiditate!
                 <ul>
                     <li>
-                        {{ company.id }}<br/>
-                        {{ company.name }}<br/>
-                        {{ company.description }}<br/>
+                        {{ company.data.name }}
+                    </li>
+                    <li>
+                        {{ company.data.description }}
                     </li>
                 </ul>
             </div>

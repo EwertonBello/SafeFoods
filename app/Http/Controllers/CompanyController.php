@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,14 +34,13 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
         $company = Auth::user()->company;
         return Inertia::render('Company/Company', [
-            'company' => $company
+            'company' => new CompanyResource($company),
         ]);
     }
 
