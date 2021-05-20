@@ -28,4 +28,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::get('/company', [CompanyController::class, 'show'])->name('company');
+Route::get('/company', [CompanyController::class, 'show'])->name('company')->middleware(['auth:sanctum']);

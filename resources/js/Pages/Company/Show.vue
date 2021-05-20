@@ -10,14 +10,13 @@
             </div>
 
             <div class="mt-6 text-gray-500">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi non quia dolorum quasi voluptatibus quas, officiis ipsam amet, pariatur placeat ex eos beatae voluptate neque repudiandae officia voluptatum ad cupiditate!
                 <ul>
-                    <li>
-                        {{ company.data.name }}
-                    </li>
-                    <li>
-                        {{ company.data.description }}
-                    </li>
+                    <li>{{ company.data.name }}</li>
+                    <li>{{ company.data.description }}</li>
+                    <li>{{ company.data.image }}</li>
+                    <li>{{ company.data.video_presentation }}</li>
+                    <li>{{ company.data.live }}</li>
+                    <li>{{ company.data.delivery }}</li>
                 </ul>
             </div>
         </div>
