@@ -53,7 +53,9 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        dd($company);
+        return Inertia::render('Company/Edit', [
+            'company' => new CompanyResource($company),
+        ]);
     }
 
     /**
