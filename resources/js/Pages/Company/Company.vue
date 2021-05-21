@@ -1,27 +1,34 @@
 <template>
-    <div>
-        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-            <div>
-                <jet-application-logo class="block h-12 w-auto" />
-            </div>
+    <app-layout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Estabelecimento
+            </h2>
+        </template>
 
-            <div class="mt-8 text-2xl">
-                Informações relacionadas ao estabelecimento
-            </div>
-
-            <div class="mt-6 text-gray-500">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi non quia dolorum quasi voluptatibus quas, officiis ipsam amet, pariatur placeat ex eos beatae voluptate neque repudiandae officia voluptatum ad cupiditate!
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <Show v-bind:company="company" />
+                </div>
             </div>
         </div>
-    </div>
+    </app-layout>
 </template>
 
 <script>
-    import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
+import AppLayout from '@/Layouts/AppLayout'
+import Show from '@/Pages/Company/Show'
 
-    export default {
-        components: {
-            JetApplicationLogo,
-        },
-    }
+export default {
+    components: {
+        AppLayout,
+        Show,
+    },
+    props: {
+        errors: Array,
+        company: Object,
+    },
+}
 </script>
+
