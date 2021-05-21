@@ -28,4 +28,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::get('/company', [CompanyController::class, 'show'])->name('company')->middleware(['auth:sanctum']);
+Route::resource('/company', CompanyController::class)->only(['index', 'show', 'edit', 'update']);
+Route::get('user/company', [CompanyController::class, 'my_company'])->name('company')->middleware(['auth:sanctum']);
