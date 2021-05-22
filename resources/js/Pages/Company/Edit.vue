@@ -26,7 +26,7 @@
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nome</label>
                                     <input 
-                                    v-bind:value="company.data.name"
+                                    v-model="form.name"
                                     class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
                                     type="text" 
                                     placeholder="Nome" />
@@ -35,7 +35,7 @@
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Descrição</label>
                                     <textarea 
-                                    v-bind:value="company.data.description"
+                                    v-model="form.description"
                                     class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
                                     type="text">
                                     </textarea>
@@ -44,7 +44,7 @@
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Vídeo Sobre</label>
                                     <input 
-                                    v-bind:value="company.data.video_presentation"
+                                    v-model="form.video_presentation"
                                     class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
                                     type="text" 
                                     placeholder="https://www.youtube.com/embed/..." />
@@ -53,7 +53,7 @@
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Live</label>
                                     <input 
-                                    v-bind:value="company.data.live"
+                                    v-model="form.live"
                                     class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
                                     type="text" 
                                     placeholder="https://www.twitch.tv/..." />
@@ -62,7 +62,7 @@
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Delivery</label>
                                     <input 
-                                    v-bind:value="company.data.delivery"
+                                    v-model="form.delivery"
                                     class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
                                     type="text" 
                                     placeholder="https://www.ifood.com.br/delivery/..." />
@@ -83,7 +83,7 @@
 
                                 <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
                                 <inertia-link :href="route('company')" class='w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Cancelar</inertia-link>
-                                <button class='w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Salvar</button>
+                                <button @click="save" class='w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Salvar</button>
                                 </div>
 
                             </div>
@@ -100,6 +100,18 @@ import AppLayout from '@/Layouts/AppLayout'
 import JetApplicationMark from '@/Jetstream/ApplicationMark'
 
 export default {
+  data() {
+    return {
+      form: this.$inertia.form({
+        name: this.company.data.name,
+        description: this.company.data.description,
+        image: this.company.data.image,
+        video_presentation: this.company.data.video_presentation,
+        live: this.company.data.live,
+        delivery: this.company.data.delivery,
+      }),
+    }
+  },
     components: {
         AppLayout,
         JetApplicationMark,
@@ -108,5 +120,16 @@ export default {
         errors: Array,
         company: Object,
     },
+    methods: {
+        save() {
+            this.$inertia.put(route('company.update', this.company.data.id), this.form)
+            .then(() => {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Informações atualizadas com sucesso!'
+                });
+            });
+        }
+    }
 }
 </script>

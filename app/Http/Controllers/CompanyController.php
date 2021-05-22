@@ -67,6 +67,6 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        dd($company);
+        dd($company, $request);
     }
 }
