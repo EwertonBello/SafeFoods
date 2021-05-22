@@ -24,7 +24,12 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'video_presentation' => 'nullable',
+            'live' => 'required',
+            'delivery' => 'required',
         ];
     }
 }
