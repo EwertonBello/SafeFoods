@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CompanyController extends Controller
@@ -60,12 +62,13 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Resources\CompanyResource  $request
+     * @param  \App\Http\Requests\CompanyRequest  $request
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(CompanyResource $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
-        dd($company, $request);
+        $company->update($request->all());
+        return Redirect::route('company');
     }
 }
