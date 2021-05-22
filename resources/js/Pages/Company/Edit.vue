@@ -25,28 +25,47 @@
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nome</label>
-                                    <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="Nome" />
+                                    <input 
+                                    v-bind:value="company.data.name"
+                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    type="text" 
+                                    placeholder="Nome" />
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Descrição</label>
-                                    <textarea class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text">
+                                    <textarea 
+                                    v-bind:value="company.data.description"
+                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    type="text">
                                     </textarea>
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Vídeo Sobre</label>
-                                    <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="https://www.youtube.com/embed/..." />
+                                    <input 
+                                    v-bind:value="company.data.video_presentation"
+                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    type="text" 
+                                    placeholder="https://www.youtube.com/embed/..." />
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Live</label>
-                                    <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="https://www.twitch.tv/..." />
+                                    <input 
+                                    v-bind:value="company.data.live"
+                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    type="text" 
+                                    placeholder="https://www.twitch.tv/..." />
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Delivery</label>
-                                    <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="https://www.ifood.com.br/delivery/..." />
+                                    <input 
+                                    v-bind:value="company.data.delivery"
+                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    type="text" 
+                                    placeholder="https://www.ifood.com.br/delivery/..." />
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
