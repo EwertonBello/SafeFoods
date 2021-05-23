@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -66,9 +67,10 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(CompanyRequest $request, Company $company)
+    public function update(Request $request, Company $company)
     {
-        $company->update($request->all());
-        return Redirect::route('company');
+        dd($request->all(), $request->files);
+//        $company->update($request->all());
+//        return Redirect::route('company');
     }
 }

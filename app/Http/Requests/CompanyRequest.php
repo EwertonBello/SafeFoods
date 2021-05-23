@@ -27,7 +27,7 @@ class CompanyRequest extends FormRequest
         return [
             'name' => 'required',
             'description' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
             'video_presentation' => 'nullable',
             'live' => 'required',
             'delivery' => 'required',
