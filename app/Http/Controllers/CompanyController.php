@@ -46,7 +46,7 @@ class CompanyController extends Controller
 //        id, description, image, name
         $companies = Company::all();
         return Inertia::render('Company/List', [
-            'companies' => $companies,
+            'companies' => new CompanyResource::collection($companies),
         ]);
     }
 
