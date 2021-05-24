@@ -44,8 +44,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-//        id, description, image, name
-        $companies = Company::all();
+        $companies = Company::all()
+            ->whereNotNull('name')
+            ->whereNotNull('delivery');
         return Inertia::render('Company/List', [
             'companies' => CompanyItemResource::collection($companies),
         ]);
