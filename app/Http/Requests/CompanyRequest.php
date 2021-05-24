@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class CompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,12 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'nullable',
+            'video_presentation' => 'nullable',
+            'live' => 'required',
+            'delivery' => 'required',
         ];
     }
 }
