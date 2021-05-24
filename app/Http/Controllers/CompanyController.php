@@ -44,7 +44,9 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        dd($companies);
+        return Inertia::render('Company/List', [
+            'companies' => $companies,
+        ]);
     }
 
     /**

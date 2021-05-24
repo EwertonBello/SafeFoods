@@ -1,20 +1,6 @@
 <template>
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        <div v-if="canLogin" class="fixed top-0 right-0 px-6 py-4 sm:block">
-            <inertia-link v-if="$page.props.user" href="/dashboard" class="text-sm text-gray-700 hover:underline">
-                Dashboard
-            </inertia-link>
-
-            <template v-else>
-                <inertia-link :href="route('login')" class="text-sm text-gray-700 hover:underline">
-                    Entrar
-                </inertia-link>
-
-                <inertia-link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 hover:underline">
-                    Cadastrar-se
-                </inertia-link>
-            </template>
-        </div>
+        <Header canLogin canRegister/>
 
         <div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
             <div class="flex flex-col w-full lg:w-1/3 mx-auto text-center md:justify-center md:items-start p-8">
@@ -42,8 +28,12 @@
 <script>
     import chef from "@/assets/chef.svg";
     import logo from "@/assets/logo.png";
+    import Header from "@/Shared/Components/Header";
 
     export default {
+        components: {
+            Header,
+        },
         props: {
             canLogin: Boolean,
             canRegister: Boolean,
