@@ -25,7 +25,7 @@
                 <p class="text-sm md:text-base text-gray-600 mb-4">
                     Conheça o lugar onde você come.
                 </p>
-                <inertia-link :href="route('login')" class="bg-transparent hover:bg-purple-800 text-purple-700 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-purple-700 hover:border-transparent">
+                <inertia-link :href="route('company.index')" class="bg-transparent hover:bg-purple-800 text-purple-700 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-purple-700 hover:border-transparent">
                     Explorar agora
                 </inertia-link>
             </div>

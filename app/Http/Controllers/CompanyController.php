@@ -14,6 +14,16 @@ use Inertia\Inertia;
 class CompanyController extends Controller
 {
     /**
+     * Display company dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
+    {
+        return Inertia::render('Dashboard');
+    }
+
+    /**
      * Display company of this logged user.
      *
      * @return \Illuminate\Http\Response
