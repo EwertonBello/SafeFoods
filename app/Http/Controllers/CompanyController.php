@@ -74,12 +74,12 @@ class CompanyController extends Controller
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
             $filename = Str::slug($request->name).'_'.time().'.'.$extension;
-            $old_path = $company->image;
+            $old_path = 'public/company/'.$company->image;
             if (Storage::exists($old_path)) {
                 Storage::delete($old_path);
             }
-            $path = $request->image->storeAs('public/company', $filename);
-            $data['image'] = $path;
+            $request->image->storeAs('public/company', $filename);
+            $data['image'] = '/storage/company/'.$filename;
         }
 
         $company->update($data);
