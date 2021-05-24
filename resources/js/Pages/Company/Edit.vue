@@ -140,12 +140,10 @@ export default {
             this.form._method = 'PUT';
             this.$inertia.post(route('company.update', this.company.data.id), this.form)
             .then(() => {
-                console.log(!this.errors);
-                console.log(this.errors.length);
-                if (!this.errors.length) {
+                if (this.$page.props.flash.success) {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Informações atualizadas com sucesso!'
+                        title: this.$page.props.flash.success
                     });
                 }
             });
