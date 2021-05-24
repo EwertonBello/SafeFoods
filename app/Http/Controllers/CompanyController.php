@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyRequest;
+use App\Http\Resources\CompanyItemResource;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,7 @@ class CompanyController extends Controller
 //        id, description, image, name
         $companies = Company::all();
         return Inertia::render('Company/List', [
-            'companies' => new CompanyResource::collection($companies),
+            'companies' => CompanyItemResource::collection($companies),
         ]);
     }
 
