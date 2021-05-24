@@ -131,12 +131,12 @@ export default {
             console.log(this.form);
             this.form._method = 'PUT';
             this.$inertia.post(route('company.update', this.company.data.id), this.form)
-            // .then(() => {
-            //     Toast.fire({
-            //         icon: 'success',
-            //         title: 'Informações atualizadas com sucesso!'
-            //     });
-            // });
+            .then(() => {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Informações atualizadas com sucesso!'
+                });
+            });
         }
     }
 }

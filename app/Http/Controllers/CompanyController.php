@@ -81,7 +81,8 @@ class CompanyController extends Controller
             $path = $request->image->storeAs('public/company', $filename);
             $data['image'] = $path;
         }
-        $company->update($request->all());
+
+        $company->update($data);
         return Redirect::route('company');
     }
 }

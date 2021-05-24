@@ -18027,12 +18027,12 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       console.log(this.form);
       this.form._method = 'PUT';
-      this.$inertia.post(route('company.update', this.company.data.id), this.form); // .then(() => {
-      //     Toast.fire({
-      //         icon: 'success',
-      //         title: 'Informações atualizadas com sucesso!'
-      //     });
-      // });
+      this.$inertia.post(route('company.update', this.company.data.id), this.form).then(function () {
+        Toast.fire({
+          icon: 'success',
+          title: 'Informações atualizadas com sucesso!'
+        });
+      });
     }
   }
 });
