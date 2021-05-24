@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyRequest;
+use App\Http\Resources\CompanyItemResource;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,16 @@ use Inertia\Inertia;
 
 class CompanyController extends Controller
 {
+    /**
+     * Display company dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
+    {
+        return Inertia::render('Dashboard');
+    }
+
     /**
      * Display company of this logged user.
      *
@@ -33,8 +44,11 @@ class CompanyController extends Controller
      */
     public function index()
     {
+//        id, description, image, name
         $companies = Company::all();
-        dd($companies);
+        return Inertia::render('Company/List', [
+            'companies' => CompanyItemResource::collection($companies),
+        ]);
     }
 
     /**
