@@ -64,13 +64,15 @@ class CompanyController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing user company.
      *
-     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function edit(Company $company)
     {
+        if (Auth::id() != $company->user_id) {
+            return Redirect::route('company');
+        }
         return Inertia::render('Company/Edit', [
             'company' => new CompanyResource($company),
         ]);
@@ -85,6 +87,9 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $request, Company $company)
     {
+        if (Auth::id() != $company->user_id) {
+            return Redirect::route('company');
+        }
         $data = $request->all();
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
