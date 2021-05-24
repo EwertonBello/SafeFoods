@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class CompanyController extends Controller
@@ -67,10 +68,20 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
-        dd($request->all(), $request->files);
-//        $company->update($request->all());
-//        return Redirect::route('company');
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = Str::slug($request->name).'_'.time().'.'.$extension;
+            $old_path = $company->image;
+            if (Storage::exists($old_path)) {
+                Storage::delete($old_path);
+            }
+            $path = $request->image->storeAs('public/company', $filename);
+            $data['image'] = $path;
+        }
+        $company->update($request->all());
+        return Redirect::route('company');
     }
 }
