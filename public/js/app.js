@@ -18070,12 +18070,12 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this = this;
 
-      console.log(this.form);
       this.form._method = 'PUT';
       this.$inertia.post(route('company.update', this.company.data.id), this.form).then(function () {
-        console.log(_this.errors);
+        console.log(!_this.errors);
+        console.log(_this.errors.length);
 
-        if (!_this.errors) {
+        if (!_this.errors.length) {
           Toast.fire({
             icon: 'success',
             title: 'Informações atualizadas com sucesso!'

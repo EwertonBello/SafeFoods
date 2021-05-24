@@ -98,6 +98,7 @@ class CompanyController extends Controller
         }
 
         $company->update($data);
-        return Redirect::route('company');
+        return Redirect::route('company')
+            ->with('success', 'Informações atualizadas com sucesso! Backend');
     }
 }
