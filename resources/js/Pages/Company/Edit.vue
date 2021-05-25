@@ -18,30 +18,33 @@
                                 </div>
 
                                 <div class="flex justify-center">
-                                <div class="flex">
-                                    <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Estabelecimento</h1>
-                                </div>
-                                    <ul>
-                                        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-                                    </ul>
+                                    <div class="flex">
+                                        <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Estabelecimento</h1>
+                                    </div>
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nome</label>
                                     <input 
                                     v-model="form.name"
-                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    class="py-2 px-3 rounded-lg border-2 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
                                     type="text" 
-                                    placeholder="Nome" />
+                                    placeholder="Nome" 
+                                    v-bind:class="errors.name ? 'border-red-500': 'border-purple-300'"
+                                    />
+                                    <div class="text-red-500">{{ errors?.name }}</div>
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Descrição</label>
                                     <textarea 
                                     v-model="form.description"
-                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-                                    type="text">
+                                    class="py-2 px-3 rounded-lg border-2 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    type="text"
+                                    v-bind:class="errors.description ? 'border-red-500': 'border-purple-300'"
+                                    >
                                     </textarea>
+                                    <div class="text-red-500">{{ errors?.description }}</div>
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
@@ -57,18 +60,24 @@
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Live</label>
                                     <input 
                                     v-model="form.live"
-                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    class="py-2 px-3 rounded-lg border-2 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
                                     type="text" 
-                                    placeholder="https://www.twitch.tv/..." />
+                                    placeholder="https://www.twitch.tv/..." 
+                                    v-bind:class="errors.live ? 'border-red-500': 'border-purple-300'"
+                                    />
+                                    <div class="text-red-500">{{ errors?.live }}</div>
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
                                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Delivery</label>
                                     <input 
                                     v-model="form.delivery"
-                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+                                    class="py-2 px-3 rounded-lg border-2 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
                                     type="text" 
-                                    placeholder="https://www.ifood.com.br/delivery/..." />
+                                    placeholder="https://www.ifood.com.br/delivery/..." 
+                                    v-bind:class="errors.delivery ? 'border-red-500': 'border-purple-300'"
+                                    />
+                                    <div class="text-red-500">{{ errors?.delivery }}</div>
                                 </div>
 
                                 <div class="grid grid-cols-1 mt-5 mx-7">
@@ -128,14 +137,15 @@ export default {
     },
     methods: {
         save() {
-            console.log(this.form);
             this.form._method = 'PUT';
             this.$inertia.post(route('company.update', this.company.data.id), this.form)
             .then(() => {
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Informações atualizadas com sucesso!'
-                });
+                if (this.$page.props.flash.success) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: this.$page.props.flash.success
+                    });
+                }
             });
         }
     }

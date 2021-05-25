@@ -44,8 +44,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-//        id, description, image, name
-        $companies = Company::all();
+        $companies = Company::all()
+            ->whereNotNull('name')
+            ->whereNotNull('delivery');
         return Inertia::render('Company/List', [
             'companies' => CompanyItemResource::collection($companies),
         ]);
@@ -59,17 +60,21 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        dd($company);
+        return Inertia::render('Company/Show', [
+            'company' => new CompanyResource($company),
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing user company.
      *
-     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function edit(Company $company)
     {
+        if (Auth::id() != $company->user_id) {
+            return Redirect::route('company');
+        }
         return Inertia::render('Company/Edit', [
             'company' => new CompanyResource($company),
         ]);
@@ -84,6 +89,9 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $request, Company $company)
     {
+        if (Auth::id() != $company->user_id) {
+            return Redirect::route('company');
+        }
         $data = $request->all();
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
@@ -97,6 +105,7 @@ class CompanyController extends Controller
         }
 
         $company->update($data);
-        return Redirect::route('company');
+        return Redirect::route('company')
+            ->with('success', 'Informações atualizadas com sucesso!');
     }
 }
