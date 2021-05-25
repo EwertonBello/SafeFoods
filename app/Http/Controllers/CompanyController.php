@@ -60,7 +60,9 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        dd($company);
+        return Inertia::render('Company/Show', [
+            'company' => new CompanyResource($company),
+        ]);
     }
 
     /**
