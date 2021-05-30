@@ -25,4 +25,8 @@ class Company extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function accessDeliveries() {
+        return $this->hasMany(AccessDelivery::class);
+    }
+
 }
