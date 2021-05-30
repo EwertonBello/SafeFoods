@@ -31,7 +31,7 @@ class CompanyController extends Controller
     public function delivery(Company $company)
     {
         $company->accessDeliveries()->create();
-        return Redirect::to($company->delivery);
+        return Inertia::location($company->delivery);
     }
 
     /**

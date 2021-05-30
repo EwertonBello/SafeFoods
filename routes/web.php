@@ -30,4 +30,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::resource('/company', CompanyController::class)->only(['index', 'show']);
-Route::get('/company/delivery/{company}', [CompanyController::class, 'delivery'])->name('delivery');
+Route::get('/company/delivery/{company}', [CompanyController::class, 'delivery'])->name('company.delivery');

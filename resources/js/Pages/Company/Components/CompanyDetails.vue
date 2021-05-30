@@ -23,8 +23,7 @@ export default {
     },
     methods: {
         goToDelivery(){
-            console.log("Indo pro delivery talvez..");
-            // this.$inertia.post(route('company.delivery', this.company.id));
+            this.$inertia.get(route('company.delivery', this.company.id));
         }
     }
 }
