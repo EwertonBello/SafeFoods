@@ -7,6 +7,7 @@ use App\Http\Resources\AccessDeliveryResource;
 use App\Http\Resources\CompanyItemResource;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -23,12 +24,13 @@ class CompanyController extends Controller
     public function dashboard()
     {
         $company = Auth::user()->company;
-        $access_deliveries = $company->accessDeliveries->all();
+        $access_deliveries = $company->accessDeliveries()->orderBy('created_at', 'desc')->get();
+        $access_today_deliveries = $company->accessDeliveries()->whereDate('created_at', Carbon::today())->count();
 
         return Inertia::render('Dashboard', [
             'accessDeliveries' => AccessDeliveryResource::collection($access_deliveries),
             'accessDeliveriesCount' => count($access_deliveries),
-            'accessDeliveriesTodayCount' => count($access_deliveries),
+            'accessDeliveriesTodayCount' => $access_today_deliveries,
         ]);
     }
 
