@@ -25,11 +25,21 @@ class CompanyController extends Controller
     }
 
     /**
+     * Register access to delivery and redirect to delivery.
+     *
+     */
+    public function delivery(Company $company)
+    {
+        $company->accessDeliveries()->create();
+        return Inertia::location($company->delivery);
+    }
+
+    /**
      * Display company of this logged user.
      *
      * @return \Illuminate\Http\Response
      */
-    public function my_company()
+    public function myCompany()
     {
         $company = Auth::user()->company;
         return Inertia::render('Company/Company', [
