@@ -7,7 +7,7 @@
                 <p class="mb-8 leading-relaxed">{{ company.description }}</p>
                 <div class="flex justify-center">
                     <inertia-link v-bind:href="company.live" class="inline-flex text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded text-lg">Live</inertia-link>
-                    <inertia-link v-bind:href="company.delivery" class="ml-4 inline-flex text-white bg-red-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-800 rounded text-lg">Delivery</inertia-link>
+                    <button v-on:click="goToDelivery" class="ml-4 inline-flex text-white bg-red-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-800 rounded text-lg">Delivery</button>
                 </div>
                 <div class="relative mt-8" style="padding-top: 56.25%">
                     <iframe class="absolute inset-0 w-full h-full" v-bind:src="company.video_presentation" frameborder="0"></iframe>
@@ -21,5 +21,11 @@ export default {
     props: {
         company: Object,
     },
+    methods: {
+        goToDelivery(){
+            console.log("Indo pro delivery talvez..");
+            // this.$inertia.post(route('company.delivery', this.company.id));
+        }
+    }
 }
 </script>
