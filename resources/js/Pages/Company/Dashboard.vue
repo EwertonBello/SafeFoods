@@ -7,6 +7,10 @@
 
             <div class="mt-8 text-2xl">
                 Informações como o número de acessos ao delivery entre outros dados pertinentes ao Estabelecimento
+                <br>Acessos Total:  {{ accessDeliveriesCount }}
+                <ul>
+                    <li v-for="accessDelivery in accessDeliveries" v-bind:key="accessDelivery.id">{{ accessDelivery.id }}</li>
+                </ul>
             </div>
 
             <div class="mt-6 text-gray-500">
@@ -20,8 +24,15 @@
 import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
 
 export default {
+    props: {
+        accessDeliveries: Array,
+        accessDeliveriesCount: Number,
+    },
     components: {
         JetApplicationLogo,
     },
+    mounted(){
+        console.log(this.accessDeliveries);
+    }
 }
 </script>

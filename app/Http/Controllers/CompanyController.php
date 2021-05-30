@@ -24,8 +24,10 @@ class CompanyController extends Controller
     {
         $company = Auth::user()->company;
         $access_deliveries = $company->accessDeliveries->all();
+
         return Inertia::render('Dashboard', [
             'accessDeliveries' => AccessDeliveryResource::collection($access_deliveries),
+            'accessDeliveriesCount' => count($access_deliveries),
         ]);
     }
 

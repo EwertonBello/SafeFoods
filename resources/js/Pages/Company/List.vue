@@ -7,7 +7,7 @@
                 <section class="text-gray-600 body-font">
                     <div class="container p-5 mx-auto">
                         <div class="flex flex-wrap -m-4">
-                            <CompanyCard v-for="company of companies.data" v-bind:key="company.id" v-bind:company="company"/>
+                            <CompanyCard v-for="company in companies.data" v-bind:key="company.id" v-bind:company="company"/>
                         </div>
                     </div>
                 </section>
