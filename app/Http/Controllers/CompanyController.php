@@ -25,6 +25,16 @@ class CompanyController extends Controller
     }
 
     /**
+     * Register access to delivery and redirect to delivery.
+     *
+     */
+    public function delivery(Company $company)
+    {
+        $company->accessDeliveries()->create();
+        return Redirect::to($company->delivery);
+    }
+
+    /**
      * Display company of this logged user.
      *
      * @return \Illuminate\Http\Response
