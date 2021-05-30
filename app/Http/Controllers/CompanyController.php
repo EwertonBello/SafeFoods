@@ -21,7 +21,11 @@ class CompanyController extends Controller
      */
     public function dashboard()
     {
-        return Inertia::render('Dashboard');
+        $company = Auth::user()->company;
+        $access_deliveries = $company->accessDeliveries->all();
+        return Inertia::render('Dashboard', [
+            'accessDeliveries' => $access_deliveries,
+        ]);
     }
 
     /**

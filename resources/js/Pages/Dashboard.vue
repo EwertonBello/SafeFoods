@@ -21,9 +21,15 @@
     import Dashboard from '@/Pages/Company/Dashboard'
 
     export default {
+        props: {
+            accessDeliveries: Array,
+        },
         components: {
             AppLayout,
             Dashboard,
         },
+        mounted(){
+            console.log(this.accessDeliveries);
+        }
     }
 </script>

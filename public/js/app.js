@@ -18181,9 +18181,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    accessDeliveries: Array
+  },
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
     Dashboard: _Pages_Company_Dashboard__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  mounted: function mounted() {
+    console.log(this.accessDeliveries);
   }
 });
 
