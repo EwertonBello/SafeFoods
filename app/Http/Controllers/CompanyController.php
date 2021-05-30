@@ -29,7 +29,7 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function my_company()
+    public function myCompany()
     {
         $company = Auth::user()->company;
         return Inertia::render('Company/Company', [

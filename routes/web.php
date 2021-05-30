@@ -25,8 +25,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('dashboard', [CompanyController::class, 'dashboard'])->name('dashboard');
-    Route::get('user/company', [CompanyController::class, 'my_company'])->name('company');
+    Route::get('user/company', [CompanyController::class, 'myCompany'])->name('company');
     Route::resource('/company', CompanyController::class)->only(['edit', 'update']);
 });
 
 Route::resource('/company', CompanyController::class)->only(['index', 'show']);
+Route::post('/company/delivery', [CompanyController::class, 'delivery'])->name('delivery');
