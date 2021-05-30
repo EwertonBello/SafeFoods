@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyRequest;
+use App\Http\Resources\AccessDeliveryResource;
 use App\Http\Resources\CompanyItemResource;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
@@ -24,7 +25,7 @@ class CompanyController extends Controller
         $company = Auth::user()->company;
         $access_deliveries = $company->accessDeliveries->all();
         return Inertia::render('Dashboard', [
-            'accessDeliveries' => $access_deliveries,
+            'accessDeliveries' => AccessDeliveryResource::collection($access_deliveries),
         ]);
     }
 
