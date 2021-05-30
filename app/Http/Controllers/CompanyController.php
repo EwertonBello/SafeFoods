@@ -28,6 +28,7 @@ class CompanyController extends Controller
         return Inertia::render('Dashboard', [
             'accessDeliveries' => AccessDeliveryResource::collection($access_deliveries),
             'accessDeliveriesCount' => count($access_deliveries),
+            'accessDeliveriesTodayCount' => count($access_deliveries),
         ]);
     }
 

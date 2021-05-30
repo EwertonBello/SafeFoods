@@ -9,7 +9,11 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Dashboard v-bind:accessDeliveries="accessDeliveries.data" v-bind:accessDeliveriesCount="accessDeliveriesCount" />
+                    <Dashboard 
+                        v-bind:accessDeliveries="accessDeliveries.data" 
+                        v-bind:accessDeliveriesCount="accessDeliveriesCount" 
+                        v-bind:accessDeliveriesTodayCount="accessDeliveriesTodayCount" 
+                    />
                 </div>
             </div>
         </div>
@@ -24,6 +28,7 @@
         props: {
             accessDeliveries: Array,
             accessDeliveriesCount: Number,
+            accessDeliveriesTodayCount: Number,
         },
         components: {
             AppLayout,
