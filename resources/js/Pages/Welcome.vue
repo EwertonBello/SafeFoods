@@ -3,7 +3,7 @@
         <Header canLogin canRegister/>
 
         <div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
-            <div class="flex flex-col w-full lg:w-1/3 mx-auto text-center md:justify-center md:items-start p-8">
+            <div class="flex flex-col w-full lg:w-1/3 mx-auto text-center md:justify-center md:items-start p-8 mt-2">
                 <img class="mx-auto md:mx-0 w-1/2 h-1/2" :src="logo" alt="Logo Welcome">
                 <h2 class="text-3xl md:text-5xl leading-relaxed md:leading-snug mb-2">
                     SafeFoods
