@@ -16,7 +16,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="accessDelivery in accessDeliveries" v-bind:key="accessDelivery.id">
+                            <tr v-for="accessDelivery in accessDeliveries.data" v-bind:key="accessDelivery.id">
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <p class="text-gray-900 whitespace-no-wrap">
                                         {{ accessDelivery.id }}
@@ -30,6 +30,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <CursorPagination v-bind:links="accessDeliveries.links"/>
                 </div>
             </div>
         </div>
@@ -37,12 +38,14 @@
 
 </template>
 <script>
+    import CursorPagination from "@/Shared/Components/CursorPagination";
+
     export default {
         props: {
             accessDeliveries: Array,
         },
-        mounted(){
-            console.log(this.accessDeliveries);
+        components: {
+            CursorPagination,
         }
     }
 </script>
