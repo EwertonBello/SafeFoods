@@ -1,4 +1,4 @@
-# SafeFoods [v0.12.0]
+# SafeFoods [v0.12.1]
 
 Uma aplicação baseada no trabalho de Gestão Organizacional  
 
