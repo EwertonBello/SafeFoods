@@ -7,7 +7,7 @@
                 <section class="text-gray-600 body-font">
                     <div class="container p-5 mx-auto">
                         <div class="flex flex-wrap -m-4">
-                            <CompanyDetails v-bind:company="company.data"/>
+                            <CompanyCard v-for="company of companies.data" v-bind:key="company.id" v-bind:company="company"/>
                         </div>
                     </div>
                 </section>
@@ -18,16 +18,16 @@
 
 <script>
 import Header from "@/Shared/Components/Header";
-import CompanyDetails from "@/Pages/Company/Components/CompanyDetails";
+import CompanyCard from "@/Pages/Company/Components/CompanyCard";
 
 export default {
     components: {
         Header,
-        CompanyDetails,
+        CompanyCard,
     },
     props: {
         errors: Array,
-        company: Object,
+        companies: Array,
     },
 }
 </script>
