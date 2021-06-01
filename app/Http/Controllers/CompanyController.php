@@ -27,7 +27,7 @@ class CompanyController extends Controller
         $access_deliveries = $company->accessDeliveries()->orderBy('id', 'desc')->cursorPaginate(5);
         $access_deliveries_count = $company->accessDeliveries->count();
         $access_today_deliveries_count = $company->accessDeliveries()
-            ->whereDate('created_at', Carbon::now()->setTimezone('America/Sao_Paulo'))
+            ->whereDate('created_at', Carbon::now())
             ->count();
 
         return Inertia::render('Dashboard', [
