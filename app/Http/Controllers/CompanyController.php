@@ -26,9 +26,7 @@ class CompanyController extends Controller
         $company = Auth::user()->company;
         $access_deliveries = $company->accessDeliveries()->orderBy('id', 'desc')->cursorPaginate(5);
         $access_deliveries_count = $company->accessDeliveries->count();
-        $access_today_deliveries_count = $company->accessDeliveries()
-            ->whereDate('created_at', Carbon::now())
-            ->count();
+        $access_today_deliveries_count = $company->accessDeliveries()->today()->count();
 
         return Inertia::render('Dashboard', [
             'accessDeliveries' => AccessDeliveryResource::collection($access_deliveries),
