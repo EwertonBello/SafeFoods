@@ -7,7 +7,6 @@ use App\Http\Resources\AccessDeliveryResource;
 use App\Http\Resources\CompanyItemResource;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +18,7 @@ class CompanyController extends Controller
     /**
      * Display company dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function dashboard()
     {
@@ -39,8 +38,9 @@ class CompanyController extends Controller
      * Register access to delivery and redirect to delivery.
      *
      */
-    public function delivery(Company $company)
+    public function delivery(int $company_id)
     {
+        $company = Company::company($company_id);
         $company->accessDeliveries()->create();
         return Inertia::location($company->delivery);
     }
@@ -48,7 +48,7 @@ class CompanyController extends Controller
     /**
      * Display company of this logged user.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function myCompany()
     {
@@ -61,11 +61,11 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        $companies = Company::all()
+        $companies = Company::companies()->get()
             ->whereNotNull('name')
             ->whereNotNull('delivery');
         return Inertia::render('Company/List', [
@@ -76,11 +76,12 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
+     * @param  int  $company_id
+     * @return \Inertia\Response
      */
-    public function show(Company $company)
+    public function show(int $company_id)
     {
+        $company = Company::company($company_id);
         return Inertia::render('Company/Show', [
             'company' => new CompanyResource($company),
         ]);
@@ -89,13 +90,10 @@ class CompanyController extends Controller
     /**
      * Show the form for editing user company.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function edit(Company $company)
     {
-        if (Auth::id() != $company->user_id) {
-            return Redirect::route('company');
-        }
         return Inertia::render('Company/Edit', [
             'company' => new CompanyResource($company),
         ]);
@@ -106,13 +104,10 @@ class CompanyController extends Controller
      *
      * @param  \App\Http\Requests\CompanyRequest  $request
      * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CompanyRequest $request, Company $company)
     {
-        if (Auth::id() != $company->user_id) {
-            return Redirect::route('company');
-        }
         $data = $request->all();
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
