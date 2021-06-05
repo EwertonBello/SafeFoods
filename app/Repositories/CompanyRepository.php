@@ -43,12 +43,12 @@ class CompanyRepository implements CompanyRepositoryInterface
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
             $filename = Str::slug($request->name).'_'.time().'.'.$extension;
-            $old_path = 'public/company/'.$company->image;
-            if (Storage::exists($old_path)) {
-                Storage::delete($old_path);
+            $old_path = str_replace("https://safefoods.s3.us-east-2.amazonaws.com/","", $company->image);
+            if (Storage::disk('s3')->exists($old_path)) {
+                Storage::disk('s3')->delete($old_path);
             }
-            $request->image->storeAs('public/company', $filename);
-            $data['image'] = '/storage/company/'.$filename;
+            $path = $request->file('image')->storePubliclyAs('company', $filename, 's3');
+            $data['image'] = Storage::disk('s3')->url($path);
         }
 
         $company->update($data);
