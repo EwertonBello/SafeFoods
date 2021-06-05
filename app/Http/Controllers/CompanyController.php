@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
+
 use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\AccessDeliveryResource;
 use App\Http\Resources\CompanyItemResource;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Inertia\Inertia;
+use App\Repositories\CompanyRepository;
 
 class CompanyController extends Controller
 {
     /**
      * Display company dashboard.
      *
+     * @param CompanyRepository $repository
      * @return \Inertia\Response
      */
-    public function dashboard()
+    public function dashboard(CompanyRepository $repository)
     {
-        $company = Auth::user()->company;
+        $company = $repository->myCompany();
         $access_deliveries = $company->accessDeliveries()->orderBy('id', 'desc')->cursorPaginate(5);
         $access_deliveries_count = $company->accessDeliveries->count();
         $access_today_deliveries_count = $company->accessDeliveries()->today()->count();
@@ -37,10 +39,13 @@ class CompanyController extends Controller
     /**
      * Register access to delivery and redirect to delivery.
      *
+     * @param  int  $company_id
+     * @param CompanyRepository $repository
+     * @return \Illuminate\Http\Response
      */
-    public function delivery(int $company_id)
+    public function delivery(int $company_id, CompanyRepository $repository)
     {
-        $company = Company::company($company_id);
+        $company = $repository->getCompany($company_id);
         $company->accessDeliveries()->create();
         return Inertia::location($company->delivery);
     }
@@ -48,11 +53,12 @@ class CompanyController extends Controller
     /**
      * Display company of this logged user.
      *
+     * @param CompanyRepository $repository
      * @return \Inertia\Response
      */
-    public function myCompany()
+    public function myCompany(CompanyRepository $repository)
     {
-        $company = Auth::user()->company;
+        $company = $repository->myCompany();
         return Inertia::render('Company/Company', [
             'company' => new CompanyResource($company),
         ]);
@@ -61,13 +67,12 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param CompanyRepository $repository
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(CompanyRepository $repository)
     {
-        $companies = Company::companies()->get()
-            ->whereNotNull('name')
-            ->whereNotNull('delivery');
+        $companies = $repository->getValidCompanies();
         return Inertia::render('Company/List', [
             'companies' => CompanyItemResource::collection($companies),
         ]);
@@ -77,11 +82,12 @@ class CompanyController extends Controller
      * Display the specified resource.
      *
      * @param  int  $company_id
+     * @param CompanyRepository $repository
      * @return \Inertia\Response
      */
-    public function show(int $company_id)
+    public function show(int $company_id, CompanyRepository $repository)
     {
-        $company = Company::company($company_id);
+        $company = $repository->getCompany($company_id);
         return Inertia::render('Company/Show', [
             'company' => new CompanyResource($company),
         ]);
@@ -90,6 +96,7 @@ class CompanyController extends Controller
     /**
      * Show the form for editing user company.
      *
+     * @param  \App\Models\Company  $company
      * @return \Inertia\Response
      */
     public function edit(Company $company)
@@ -104,23 +111,12 @@ class CompanyController extends Controller
      *
      * @param  \App\Http\Requests\CompanyRequest  $request
      * @param  \App\Models\Company  $company
+     * @param CompanyRepository $repository
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CompanyRequest $request, Company $company)
+    public function update(CompanyRequest $request, Company $company, CompanyRepository $repository)
     {
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $filename = Str::slug($request->name).'_'.time().'.'.$extension;
-            $old_path = 'public/company/'.$company->image;
-            if (Storage::exists($old_path)) {
-                Storage::delete($old_path);
-            }
-            $request->image->storeAs('public/company', $filename);
-            $data['image'] = '/storage/company/'.$filename;
-        }
-
-        $company->update($data);
+        $repository->updateCompany($request, $company);
         return Redirect::route('company')
             ->with('success', 'Informações atualizadas com sucesso!');
     }
