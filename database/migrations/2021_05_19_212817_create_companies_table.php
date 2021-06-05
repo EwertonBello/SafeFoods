@@ -17,7 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('name')->nullable();
-            $table->string('image')->default('/storage/company/default-image.jpg');
+            $table->string('image')->default('https://safefoods.s3.us-east-2.amazonaws.com/company/default-image.jpg');
             $table->text('description')->nullable();
             $table->string('video_presentation')->nullable();
             $table->string('live')->nullable();
