@@ -40,15 +40,4 @@ class Company extends Model
         return $this->hasMany(AccessDelivery::class);
     }
 
-    public function scopeCompanies($query)
-    {
-        return self::withoutGlobalScope(CompanyScope::class);
-    }
-
-    public function scopeCompany($query, $company_id)
-    {
-        $model = self::withoutGlobalScope(CompanyScope::class);
-        return $model->find($company_id);
-    }
-
 }
