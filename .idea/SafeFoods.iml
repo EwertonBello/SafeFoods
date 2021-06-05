@@ -124,6 +124,20 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/jaybizzle/crawler-detect" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/hamcrest/hamcrest-php" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dragonmantank/cron-expression" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/0c" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/03" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/5f" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/07" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/19" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/32" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/67" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/69" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/93" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/c6" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/da" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/fc" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework/cache/data/ff" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
