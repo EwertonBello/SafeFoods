@@ -10,19 +10,25 @@ use App\Http\Resources\AccessDeliveryResource;
 use App\Http\Resources\CompanyItemResource;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
-use App\Repositories\CompanyRepository;
+use App\Repositories\CompanyRepositoryInterface;
 
 class CompanyController extends Controller
 {
+    private $repository;
+
+    public function __construct(CompanyRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display company dashboard.
      *
-     * @param CompanyRepository $repository
      * @return \Inertia\Response
      */
-    public function dashboard(CompanyRepository $repository)
+    public function dashboard()
     {
-        $company = $repository->myCompany();
+        $company = $this->repository->myCompany();
         $access_deliveries = $company->accessDeliveries()->orderBy('id', 'desc')->cursorPaginate(5);
         $access_deliveries_count = $company->accessDeliveries->count();
         $access_today_deliveries_count = $company->accessDeliveries()->today()->count();
@@ -38,12 +44,11 @@ class CompanyController extends Controller
      * Register access to delivery and redirect to delivery.
      *
      * @param  int  $company_id
-     * @param CompanyRepository $repository
      * @return \Illuminate\Http\Response
      */
-    public function delivery(int $company_id, CompanyRepository $repository)
+    public function delivery(int $company_id)
     {
-        $company = $repository->getCompany($company_id);
+        $company = $this->repository->getCompany($company_id);
         $company->accessDeliveries()->create();
         return Inertia::location($company->delivery);
     }
@@ -51,12 +56,11 @@ class CompanyController extends Controller
     /**
      * Display company of this logged user.
      *
-     * @param CompanyRepository $repository
      * @return \Inertia\Response
      */
-    public function myCompany(CompanyRepository $repository)
+    public function myCompany()
     {
-        $company = $repository->myCompany();
+        $company = $this->repository->myCompany();
         return Inertia::render('Company/Company', [
             'company' => new CompanyResource($company),
         ]);
@@ -65,12 +69,11 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param CompanyRepository $repository
      * @return \Inertia\Response
      */
-    public function index(CompanyRepository $repository)
+    public function index()
     {
-        $companies = $repository->getValidCompanies();
+        $companies = $this->repository->getValidCompanies();
         return Inertia::render('Company/List', [
             'companies' => CompanyItemResource::collection($companies),
         ]);
@@ -80,12 +83,11 @@ class CompanyController extends Controller
      * Display the specified resource.
      *
      * @param  int  $company_id
-     * @param CompanyRepository $repository
      * @return \Inertia\Response
      */
-    public function show(int $company_id, CompanyRepository $repository)
+    public function show(int $company_id)
     {
-        $company = $repository->getCompany($company_id);
+        $company = $this->repository->getCompany($company_id);
         return Inertia::render('Company/Show', [
             'company' => new CompanyResource($company),
         ]);
@@ -109,12 +111,11 @@ class CompanyController extends Controller
      *
      * @param  \App\Http\Requests\CompanyRequest  $request
      * @param  \App\Models\Company  $company
-     * @param CompanyRepository $repository
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CompanyRequest $request, Company $company, CompanyRepository $repository)
+    public function update(CompanyRequest $request, Company $company)
     {
-        $repository->updateCompany($request, $company);
+        $this->repository->updateCompany($request, $company);
         return Redirect::route('company')
             ->with('success', 'Informações atualizadas com sucesso!');
     }
