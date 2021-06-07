@@ -18,7 +18,10 @@ createApp({
     .use(InertiaPlugin)
     .mount(el);
 
-InertiaProgress.init({ color: '#4B5563' });
+InertiaProgress.init({ 
+    color: '#4B5563',
+    showSpinner: true
+});
 // My imports
 import Swal from 'sweetalert2';
 
